@@ -25,3 +25,7 @@ let someN = [1, 2, 3]
 let grault = new Grault(qBar, someN)
 
 console.log(grault.getGarply())
+
+try {
+    document.body.innerHTML = grault.getGarply()
+} catch (e) {}

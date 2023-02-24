@@ -14,3 +14,7 @@ var qBar = {
 var someN = [1, 2, 3];
 var grault = new Grault(qBar, someN);
 console.log(grault.getGarply());
+try {
+    document.body.innerHTML = grault.getGarply();
+}
+catch (e) { }
