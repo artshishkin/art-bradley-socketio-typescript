@@ -46,4 +46,11 @@
 - And start using
     - `npm run dev`
 
+#### 12. Create the SocketIO Client
+
+Install express and it's types
+
+- `npm install express@4`
+- `npm install @types/express@4 --save-dev`
+
 [licence]: https://img.shields.io/github/license/artshishkin/art-bradley-socketio-typescript.svg
