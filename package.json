@@ -14,5 +14,11 @@
   "bugs": {
     "url": "https://github.com/artshishkin/art-bradley-socketio-typescript/issues"
   },
-  "homepage": "https://github.com/artshishkin/art-bradley-socketio-typescript#readme"
+  "homepage": "https://github.com/artshishkin/art-bradley-socketio-typescript#readme",
+  "devDependencies": {
+    "@types/node": "^16.18.12"
+  },
+  "dependencies": {
+    "socket.io": "^4.6.1"
+  }
 }
