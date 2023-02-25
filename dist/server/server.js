@@ -19,7 +19,7 @@ class App {
         io.on('connection', function (socket) {
             console.log('a user connected : ' + socket.id);
             // console.dir(socket)
-            socket.emit('message', 'Hello ' + socket.id);
+            socket.emit('message', { name: 'Art', age: 39 });
             socket.on("disconnect", () => {
                 console.log('socket disconnected: ' + socket.id);
             });
