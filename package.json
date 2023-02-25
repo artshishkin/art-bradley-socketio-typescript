@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Tutorial - Socket.IO and TypeScript - from Sean Bradley (Udemy)",
   "scripts": {
+    "dev": "concurrently -k \"tsc -p ./src/server -w\" \"nodemon ./dist/server/server.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,7 +17,9 @@
   },
   "homepage": "https://github.com/artshishkin/art-bradley-socketio-typescript#readme",
   "devDependencies": {
-    "@types/node": "^16.18.12"
+    "@types/node": "^16.18.12",
+    "concurrently": "^7.6.0",
+    "nodemon": "^2.0.20"
   },
   "dependencies": {
     "socket.io": "^4.6.1"

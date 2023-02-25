@@ -29,5 +29,21 @@
     2. To serve the JavaScript output file
         - `node dist/server/server.js`
 
+#### 11. TSC Watch, Nodemon and Concurrently
+
+- After creating the tsconfig.json, we can now compile and watch for changes using
+    - `tsc -p src/server/ -w`
+- We can host using
+    - `node dist/server/server.js`
+- The nodejs doesn't restart when there are changes to the files, so we can install nodemon
+    - `npm install nodemon@2 --save-dev`
+- Now host the server using
+    - `npx nodemon dist/server/server.js`
+- Install concurrently
+    - `npm install concurrently@7 --save-dev`
+- Add this line to the package.json scripts section
+    - `"dev" : "concurrently -k \"tsc -p ./src/server -w\" \"nodemon ./dist/server/server.js\"",`
+- And start using
+    - `npm run dev`
 
 [licence]: https://img.shields.io/github/license/artshishkin/art-bradley-socketio-typescript.svg
