@@ -53,4 +53,14 @@ Install express and it's types
 - `npm install express@4`
 - `npm install @types/express@4 --save-dev`
 
+#### 13. Use TypeScript to Generate Client JavaScript
+
+- Install the Socketio-Client and Types
+    - `npm install socket.io-client@4`
+    - `npm install @types/socket.io-client@1 --save-dev`
+- You can manually recompile using
+    - `tsc -p ./src/client -w`
+- Or update npm dev script to concurrently generate changes
+    - `"dev" : "concurrently -k \"tsc -p ./src/server -w\" \"tsc -p ./src/client -w\" \"nodemon ./dist/server/server.js\"",`
+
 [licence]: https://img.shields.io/github/license/artshishkin/art-bradley-socketio-typescript.svg
