@@ -18,6 +18,10 @@ class App {
         const io = new socket_io_1.default.Server(this.server);
         io.on('connection', function (socket) {
             console.log('a user connected : ' + socket.id);
+            // console.dir(socket)
+            socket.on("disconnect", () => {
+                console.log('socket disconnected: ' + socket.id);
+            });
         });
     }
     Start() {

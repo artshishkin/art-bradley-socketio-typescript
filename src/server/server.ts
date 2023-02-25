@@ -21,6 +21,11 @@ class App {
 
         io.on('connection', function (socket: socketIO.Socket) {
             console.log('a user connected : ' + socket.id);
+            // console.dir(socket)
+
+            socket.on("disconnect", () => {
+                console.log('socket disconnected: ' + socket.id);
+            })
         });
     }
 
