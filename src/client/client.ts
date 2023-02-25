@@ -7,6 +7,10 @@ class Client {
             console.dir(mess)
             document.body.innerHTML += mess + '<br/>';
         })
+        this.socket.on("random", (mess: any) => {
+            console.dir(mess)
+            document.body.innerHTML += 'Winning number is ' + mess + '<br/>';
+        })
     }
 }
 

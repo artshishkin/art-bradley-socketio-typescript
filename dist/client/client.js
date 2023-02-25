@@ -6,6 +6,10 @@ class Client {
             console.dir(mess);
             document.body.innerHTML += mess + '<br/>';
         });
+        this.socket.on("random", (mess) => {
+            console.dir(mess);
+            document.body.innerHTML += 'Winning number is ' + mess + '<br/>';
+        });
     }
 }
 const client = new Client();

@@ -15,8 +15,8 @@ class App {
         app.use(express_1.default.static(path_1.default.join(__dirname, '../client')));
         this.server = new http_1.default.Server(app);
         // const io = new socketIO.Server(this.server,{serveClient: false})
-        const io = new socket_io_1.default.Server(this.server);
-        io.on('connection', function (socket) {
+        this.io = new socket_io_1.default.Server(this.server);
+        this.io.on('connection', function (socket) {
             console.log('a user connected : ' + socket.id);
             // console.dir(socket)
             socket.emit('message', 'Hello ' + socket.id);
@@ -25,6 +25,9 @@ class App {
                 console.log('socket disconnected: ' + socket.id);
             });
         });
+        setInterval(() => {
+            this.io.emit('random', Math.floor(Math.random() * 10));
+        }, 1000);
     }
     Start() {
         this.server.listen(this.port, () => {
