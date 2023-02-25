@@ -16,7 +16,18 @@
 2. Install SocketIO
     - `npm install socket.io@4`
 
+#### 10. Compile, Run and Setup tsconfig.json
 
+1. Compiling with options
+    1. To Compile the TypeScript file
+        - `tsc src/server/server.ts --outDir dist/server/ --esModuleInterop true`
+    2. To serve the JavaScript output file
+        - `node dist/server/server.js`
+2. Compiling with tsconfig.json
+    1. To compile
+        - `tsc -p src/server`
+    2. To serve the JavaScript output file
+        - `node dist/server/server.js`
 
 
 [licence]: https://img.shields.io/github/license/artshishkin/art-bradley-socketio-typescript.svg
