@@ -25,6 +25,9 @@ class App {
             this.game.LuckyNumbers[socket.id] = luckyNumber;
             socket.emit('message', `Hello ${socket.id}, your lucky number is ${luckyNumber}`);
             socket.broadcast.emit('message', 'Everybody, say hello to ' + socket.id);
+            socket.on("message", (mess) => {
+                console.log(`Got message from ${socket.id}: ${mess}`);
+            });
             socket.on("disconnect", () => {
                 console.log(this.game.LuckyNumbers);
                 console.log('socket disconnected: ' + socket.id);

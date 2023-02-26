@@ -15,6 +15,7 @@ class Client {
         this.socket.on("message", (mess) => {
             console.dir(mess);
             document.body.innerHTML += mess + '<br/>';
+            this.socket.emit('message', 'Thanks for having me');
         });
         this.socket.on("random", (mess) => {
             console.dir(mess);

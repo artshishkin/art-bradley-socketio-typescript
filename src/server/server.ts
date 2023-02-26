@@ -39,6 +39,10 @@ class App {
                 'Everybody, say hello to ' + socket.id
             )
 
+            socket.on("message", (mess: any) => {
+                console.log(`Got message from ${socket.id}: ${mess}`);
+            })
+
             socket.on("disconnect", () => {
                 console.log(this.game.LuckyNumbers);
                 console.log('socket disconnected: ' + socket.id);
