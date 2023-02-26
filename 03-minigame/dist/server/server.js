@@ -9,9 +9,11 @@ const http_1 = __importDefault(require("http"));
 const socket_io_1 = __importDefault(require("socket.io"));
 const luckyNumbersGame_1 = __importDefault(require("./luckyNumbersGame"));
 const RandomScreenNameGenerator_1 = __importDefault(require("./RandomScreenNameGenerator"));
+const Player_1 = __importDefault(require("./Player"));
 const port = 3000;
 class App {
     constructor(port) {
+        this.players = {};
         this.port = port;
         const app = express_1.default();
         app.use(express_1.default.static(path_1.default.join(__dirname, '../client')));
@@ -25,13 +27,17 @@ class App {
             console.log('a user connected : ' + socket.id);
             socket.on('disconnect', () => {
                 console.log('socket disconnected : ' + socket.id);
+                if (this.players && this.players[socket.id]) {
+                    delete this.players[socket.id];
+                }
             });
             socket.on('chatMessage', (chatMessage) => {
                 console.dir(chatMessage);
                 socket.broadcast.emit('chatMessage', chatMessage);
             });
             const screenName = this.randomScreenNameGenerator.generateRandomScreenName();
-            socket.emit('screenName', screenName);
+            this.players[socket.id] = new Player_1.default(screenName);
+            socket.emit('playerDetails', this.players[socket.id].player);
         });
     }
     Start() {
