@@ -63,4 +63,11 @@ Install express and it's types
 - Or update npm dev script to concurrently generate changes
     - `"dev" : "concurrently -k \"tsc -p ./src/server -w\" \"tsc -p ./src/client -w\" \"nodemon ./dist/server/server.js\"",`
 
+#### 22. Install Bootstrap
+
+- `npm install jquery@3`
+- `npm install @types/jquery@3 --save-dev`
+- `npm install bootstrap@4`
+- `npm install @types/bootstrap@4 --save-dev`
+
 [licence]: https://img.shields.io/github/license/artshishkin/art-bradley-socketio-typescript.svg
