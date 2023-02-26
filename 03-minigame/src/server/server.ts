@@ -6,6 +6,11 @@ import LuckyNumbersGame from './luckyNumbersGame'
 
 const port: number = 3000
 
+type ChatMessage = {
+    message: string;
+    from: string;
+}
+
 class App {
     private server: http.Server
     private port: number
@@ -31,6 +36,11 @@ class App {
 
             socket.on('disconnect', () => {
                 console.log('socket disconnected : ' + socket.id)
+            })
+
+            socket.on('chatMessage', (chatMessage: ChatMessage) => {
+                console.dir(chatMessage);
+                socket.broadcast.emit('chatMessage', chatMessage);
             })
         })
     }
