@@ -16,6 +16,10 @@ class Client {
         this.socket.on('connect', () => {
             console.log('connect');
         });
+        this.socket.on('screenName', (screenName) => {
+            this.screenName = screenName;
+            $('.screenName').text(this.screenName.name);
+        });
         this.socket.on('chatMessage', (chatMessage) => {
             console.log(chatMessage);
             $('#messages').append("<li><span class='float-right'><span class='circle'>" +
@@ -64,11 +68,13 @@ class Client {
         if (messageText && messageText.toString().length > 0) {
             const chatMessage = {
                 message: messageText.toString(),
-                from: this.socket.id
+                from: this.screenName.abbreviation
             };
             console.log(chatMessage);
             this.socket.emit('chatMessage', chatMessage);
-            $('#messages').append("<li><span class='float-left'><span class='circle'>Me</span></span><div class='myMessage'>" +
+            $('#messages').append("<li><span class='float-left'><span class='circle'>" +
+                this.screenName.abbreviation +
+                "</span></span><div class='myMessage'>" +
                 messageText +
                 '</div></li>');
             this.scrollChatWindow();
