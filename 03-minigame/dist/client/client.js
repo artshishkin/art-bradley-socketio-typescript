@@ -40,6 +40,31 @@ class Client {
                 }
             });
         });
+        this.socket.on('GameStates', (gameStates) => {
+            //console.dir(gameStates)
+            gameStates.forEach((gameState) => {
+                let gid = gameState.id;
+                if (gameState.gameClock >= 0) {
+                    if (gameState.gameClock >= gameState.duration) {
+                        $('#gamephase' + gid).text('New Game, Guess the Lucky Number');
+                    }
+                    $('#timer' + gid)
+                        .css('display', 'block')
+                        .text(gameState.gameClock.toString());
+                    const progressParent = (gameState.gameClock / gameState.duration) * 100;
+                    $('#timerBar' + gid)
+                        .css('background-color', '#4caf50')
+                        .css('width', progressParent + '%');
+                }
+                else {
+                    $('#timerBar' + gid)
+                        .css('background-color', '#ff0000')
+                        .css('width', '100%');
+                    $('#timer' + gid).css('display', 'none');
+                    $('#gamephase' + gid).text('Game Closed');
+                }
+            });
+        });
         this.socket.on('disconnect', (message) => {
             console.log('disconnect ' + message);
             location.reload();

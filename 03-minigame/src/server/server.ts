@@ -18,7 +18,7 @@ class App {
     private port: number
 
     private io: socketIO.Server
-    private game: LuckyNumbersGame
+    private games: { [id: number]: LuckyNumbersGame } = {}
     private randomScreenNameGenerator: RandomScreenNameGenerator
     private players: { [id: string]: Player } = {}
 
@@ -33,7 +33,10 @@ class App {
         this.server = new http.Server(app)
         this.io = new socketIO.Server(this.server)
 
-        this.game = new LuckyNumbersGame()
+        this.games[0] = new LuckyNumbersGame(0, 'Bronze Game', '🥉', 10)
+        this.games[1] = new LuckyNumbersGame(1, 'Silver Game', '🥈', 16)
+        this.games[2] = new LuckyNumbersGame(2, 'Gold Game', '🥇', 35)
+
         this.randomScreenNameGenerator = new RandomScreenNameGenerator();
 
         this.io.on('connection', (socket: socketIO.Socket) => {
@@ -56,6 +59,15 @@ class App {
             socket.emit('playerDetails', this.players[socket.id].player);
 
         })
+
+        setInterval(() => {
+            this.io.emit('GameStates', [
+                this.games[0].gameState,
+                this.games[1].gameState,
+                this.games[2].gameState,
+            ])
+        }, 1000)
+
     }
 
     public Start() {
