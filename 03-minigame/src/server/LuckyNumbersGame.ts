@@ -6,20 +6,37 @@ export default class LuckyNumbersGame {
     private _gamePhase: number = 0
     private _gameClock: number = 0
     private _gameState: GameState
+    private _updateChatCallBack: (chatMessage: ChatMessage) => void
 
-    constructor(id: number, title: string, logo: string, duration: number) {
+    constructor(id: number,
+                title: string,
+                logo: string,
+                duration: number,
+                updateChatCallBack: (chatMessage: ChatMessage) => void
+    ) {
         this._id = id
         this._title = title
         this._logo = logo
         this._duration = duration
+        this._updateChatCallBack = updateChatCallBack
 
         setInterval(() => {
             if (this._gamePhase === 0) {
                 this._gameClock = this._duration
                 this._gamePhase = 1
+                this._updateChatCallBack(<ChatMessage>{
+                    message: 'New Game',
+                    from: this._logo,
+                    type: 'gameMessage',
+                })
             } else if (this._gamePhase === 1) {
                 if (this._gameClock < 0) {
                     this._gamePhase = 2
+                    this._updateChatCallBack(<ChatMessage>{
+                        message: 'Game Closed',
+                        from: this._logo,
+                        type: 'gameMessage',
+                    })
                 }
             } else if (this._gamePhase === 2) {
                 if (this._gameClock <= -5) {
