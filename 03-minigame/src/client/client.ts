@@ -25,7 +25,7 @@ type GameState = {
 
 class Client {
     private socket: SocketIOClient.Socket
-    private player: Player;
+    private player: Player = <Player>{};
 
     constructor() {
         this.socket = io()
@@ -147,7 +147,8 @@ class Client {
         if (messageText && messageText.toString().length > 0) {
             const chatMessage: ChatMessage = {
                 message: messageText.toString(),
-                from: this.player.screenName.abbreviation
+                from: this.player.screenName.abbreviation,
+                type: "playerMessage"
             };
             console.log(chatMessage)
             this.socket.emit('chatMessage', chatMessage);
