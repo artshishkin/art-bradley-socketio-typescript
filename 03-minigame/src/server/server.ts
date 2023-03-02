@@ -33,6 +33,8 @@ class App {
             'Bronze Game',
             '🥉',
             10,
+            1,
+            this.players,
             this.updateChat
         )
         this.games[1] = new LuckyNumbersGame(
@@ -40,6 +42,8 @@ class App {
             'Silver Game',
             '🥈',
             16,
+            2,
+            this.players,
             this.updateChat
         )
         this.games[2] = new LuckyNumbersGame(
@@ -47,6 +51,8 @@ class App {
             'Gold Game',
             '🥇',
             35,
+            10,
+            this.players,
             this.updateChat
         )
 
@@ -70,6 +76,19 @@ class App {
             const screenName = this.randomScreenNameGenerator.generateRandomScreenName();
             this.players[socket.id] = new Player(screenName);
             socket.emit('playerDetails', this.players[socket.id].player);
+
+            socket.on('submitGuess', (gameId: number, guess: number) => {
+                if (guess >= 0 && guess <= 10) {
+                    if (this.games[gameId].submitGuess(socket.id, guess)) {
+                        socket.emit(
+                            'confirmGuess',
+                            gameId,
+                            guess,
+                            this.players[socket.id].player.score
+                        )
+                    }
+                }
+            })
 
         })
 
