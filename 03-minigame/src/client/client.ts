@@ -21,6 +21,7 @@ type GameState = {
     gamePhase: number
     gameClock: number
     duration: number
+    result: number
 }
 
 class Client {
@@ -63,6 +64,14 @@ class Client {
         })
 
         $(document).ready(() => {
+
+            $('#resultValue0').addClass('spinner')
+            $('#resultValue1').addClass('spinner')
+            $('#resultValue2').addClass('spinner')
+            $('#resultAlert0').alert().hide()
+            $('#resultAlert1').alert().hide()
+            $('#resultAlert2').alert().hide()
+
             $('#messageText').keypress((e) => {
                 const key = e.which
                 if (key == 13) {
@@ -83,6 +92,11 @@ class Client {
                             'New Game, Guess the Lucky Number'
                         )
                     }
+                    if (gameState.gameClock === gameState.duration - 5) {
+                        $('#resultAlert' + gid)
+                            .alert()
+                            .fadeOut(500)
+                    }
                     $('#timer' + gid)
                         .css('display', 'block')
                         .text(gameState.gameClock.toString())
@@ -97,6 +111,11 @@ class Client {
                         .css('width', '100%')
                     $('#timer' + gid).css('display', 'none')
                     $('#gamephase' + gid).text('Game Closed')
+
+                    if (gameState.gameClock === -2 && gameState.result !== -1) {
+                        $('#resultValue' + gid).text(gameState.result)
+                        $('#resultAlert' + gid).fadeIn(100)
+                    }
                 }
             })
         })

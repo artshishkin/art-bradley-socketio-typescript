@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>TypeScript Socket.IO Course</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
     <style>
         .timer {
             font-size: 4em;
@@ -146,6 +146,36 @@
             border-radius: 50px;
         }
 
+        .resultValue {
+            font-size: 3.5em;
+            width: 100%;
+            text-align: center;
+        }
+
+        @keyframes spinner {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .spinner:before {
+            content: '';
+            box-sizing: border-box;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 90px;
+            height: 90px;
+            margin-top: -45px;
+            margin-left: -45px;
+            border-radius: 50%;
+            border: 10px solid #f6f;
+            border-top-color: #0e0;
+            border-right-color: #0dd;
+            border-bottom-color: #f90;
+            animation: spinner 0.6s linear infinite;
+        }
+
         .jumbotron {
             margin-top: -40px;
             height: 180px;
@@ -226,6 +256,19 @@
                     <span class="screenName"></span>, and your Score is
                     <span class="score"></span>
                 </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="m-2">
+                            <div
+                                    id="resultAlert0"
+                                    class="alert alert-info"
+                                    role="alert">
+                                <h1 class="alert-heading p-1 resultValue"
+                                    id="resultValue0"></h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="gamePanel" id="gamePanel1">
                 <h2 id="gameTitle">🥈Silver Game</h2>
@@ -239,6 +282,19 @@
                     <span class="screenName"></span>, and your Score is
                     <span class="score"></span>
                 </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="m-2">
+                            <div
+                                    id="resultAlert1"
+                                    class="alert alert-info"
+                                    role="alert">
+                                <h1 class="alert-heading p-1 resultValue"
+                                    id="resultValue1"></h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="gamePanel" id="gamePanel2">
                 <h2 id="gameTitle">🥇Gold Game</h2>
@@ -251,6 +307,18 @@
                     Your Screen Name is
                     <span class="screenName"></span>, and your Score is
                     <span class="score"></span>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="m-2">
+                            <div id="resultAlert2"
+                                 class="alert alert-info"
+                                 role="alert">
+                                <h1 class="alert-heading p-1 resultValue"
+                                    id="resultValue2"></h1>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
