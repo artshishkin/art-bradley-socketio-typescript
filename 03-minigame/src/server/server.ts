@@ -34,8 +34,10 @@ class App {
             '🥉',
             10,
             1,
+            10,
             this.players,
-            this.updateChat
+            this.updateChat,
+            this.sendPlayerDetails
         )
         this.games[1] = new LuckyNumbersGame(
             1,
@@ -43,8 +45,10 @@ class App {
             '🥈',
             16,
             2,
+            20,
             this.players,
-            this.updateChat
+            this.updateChat,
+            this.sendPlayerDetails
         )
         this.games[2] = new LuckyNumbersGame(
             2,
@@ -52,8 +56,10 @@ class App {
             '🥇',
             35,
             10,
+            100,
             this.players,
-            this.updateChat
+            this.updateChat,
+            this.sendPlayerDetails
         )
 
         this.randomScreenNameGenerator = new RandomScreenNameGenerator();
@@ -69,7 +75,7 @@ class App {
             })
 
             socket.on('chatMessage', (chatMessage: ChatMessage) => {
-                console.dir(chatMessage);
+                // console.dir(chatMessage);
                 socket.broadcast.emit('chatMessage', chatMessage);
             })
 
@@ -104,6 +110,12 @@ class App {
 
     public updateChat = (chatMessage: ChatMessage) => {
         this.io.emit('chatMessage', chatMessage)
+    }
+
+    public sendPlayerDetails = (playerSocketId: string) => {
+        this.io
+            .to(playerSocketId)
+            .emit('playerDetails', this.players[playerSocketId].player)
     }
 
     public Start() {
