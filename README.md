@@ -70,4 +70,34 @@ Install express and it's types
 - `npm install bootstrap@4`
 - `npm install @types/bootstrap@4 --save-dev`
 
+#### 35. Provision a Cloud Server for Production
+
+Provision Droplet on DigitalOcean
+
+#### 36. Deploy Files to the Server
+
+1. SSH to droplet
+    - `ssh -i ~\.ssh\digital_ocean root@157.230.17.155`
+2. Create folders
+    - `cd /var`
+    - `mkdir www`
+    - `mkdir minigames`
+3. apt-update to ensure that your server has an up to date list of all the latest packages available.
+    - `sudo apt update`
+4. Copy files to the server
+    1. Using SCP (SSH)
+        - `scp -i ~\.ssh\digital_ocean -r ./03-minigame/dist root@157.230.17.155:/var/www/minigames/dist`
+        - `scp -i ~\.ssh\digital_ocean ./03-minigame/package.json root@157.230.17.155:/var/www/minigames/`
+    2. Using WinSCP (for Windows)
+        - Now to deploy the files using Secure File Transfer Protocol (SFTP).
+        - Download _WinSCP_ from https://winscp.net/eng/index.php and install it.
+        - Add your servers configuration and then connect.
+            - Add SSH certificate
+        - Now copy your project into the new minigames folder.
+        - You will only need the package.json and the ./dist/ folder and all of it's contents. We do not need the ./src/
+          folder and any of it's contents since we won't be compiling TypeScript on the server.
+5. Install NPM
+    - `apt install npm`
+    - `npm -v`
+
 [licence]: https://img.shields.io/github/license/artshishkin/art-bradley-socketio-typescript.svg
