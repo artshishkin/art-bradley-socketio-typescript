@@ -173,4 +173,15 @@ server {
     - test
         - `iptables -L`
 
+#### 39. Point a Domain Name
+
+1. Domains
+    - https://cloud.digitalocean.com/networking/domains/shyshkin.org
+2. Create new record
+    - A
+    - HOSTNAME: `minigames`
+    - WILL DIRECT TO: `minigames`
+3. Visit
+    - `minigames.shyshkin.org`
+
 [licence]: https://img.shields.io/github/license/artshishkin/art-bradley-socketio-typescript.svg
