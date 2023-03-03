@@ -129,4 +129,48 @@ Provision Droplet on DigitalOcean
   the old session, since it no longer exists, until you create a new session.
 - Remember, screen is useful when you want your process to continue after you close your main ssh client.
 
+#### 38. Install Nginx Proxy
+
+1. Install NGINX
+    - `sudo apt install nginx`
+2. Check its version
+    - `nginx -v`
+3. Check it's status
+    - `sudo service nginx status`
+4. Visit http://[your ip address]
+5. Delete the file /etc/nginx/sites-enabled/default
+    - `rm /etc/nginx/sites-enabled/default`
+6. Create a new file called /etc/nginx/sites-enabled/minigames.conf
+
+```nginx configuration
+server {
+    listen 80;
+    listen [::]:80;
+
+    location / {
+        proxy_pass           http://127.0.0.1:3000/;
+    }
+}
+```
+
+7. Restart NGINX
+    - `service nginx restart`
+8. Test it by visiting again http://[your ip address]
+    - Look at errors, how it is polling, and not creating a proper socket.
+9. Test nginx configuration is ok
+    - `nginx -t`
+10. Restart
+    - `sudo service nginx restart`
+    - And visit again http://[your ip address]
+    - It should be perfect without any errors.
+11. As an extra measure, to ensure that the game can only be played via the Nginx proxy, we can also block access to
+    port 3000 from the internet but not locally on the server.
+    - `iptables -L` - which rules we have active - currently none
+    - accept port 3000 for localhost only
+        - `iptables -A INPUT -p tcp -s localhost --dport 3000 -j ACCEPT`
+    - drop everything else
+        - `iptables -A INPUT -p tcp --dport 3000 -j DROP`
+    - test
+        - `iptables -L`
+
 [licence]: https://img.shields.io/github/license/artshishkin/art-bradley-socketio-typescript.svg
