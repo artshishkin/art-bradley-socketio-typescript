@@ -2,7 +2,7 @@ import express from 'express'
 import path from 'path'
 import http from 'http'
 import socketIO from 'socket.io'
-import LuckyNumbersGame from './luckyNumbersGame'
+import LuckyNumbersGame from './LuckyNumbersGame'
 import RandomScreenNameGenerator from "./RandomScreenNameGenerator";
 import Player from "./Player";
 

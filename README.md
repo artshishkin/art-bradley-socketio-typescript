@@ -100,4 +100,33 @@ Provision Droplet on DigitalOcean
     - `apt install npm`
     - `npm -v`
 
+#### 37. Start the Games on the server
+
+- Navigate into the folder on your new server that contains the package.json
+    - `cd /var/www/minigames`
+- Install the packages from the `package.json` by using the command
+    - `npm install`
+- You can start the Mini Games server.
+    - `npm start`
+- Open a browser and visit http://[your ip address]:3000
+- Go back into SSH and press Ctrl-C to stop the server.
+- We will now start it in a separate screen session so that the nodejs server continues to run in the background when we
+  close our main ssh session.
+    - `screen`
+    - Press enter.
+- Navigate to the minigames folder
+    - `cd /var/www/minigames`
+- And start the node js server
+    - `npm start`
+- Press CTRL-A and CTRL-D to detach from the screen session.
+    - The nodejs server is still running in the background and will still continue to run if we close our main SSH
+      session.
+- To go back into an existing screen session, type
+    - `screen -r`
+- See video for more details about using screen.
+- If you want to end and exit a screen session fully so that it no longer is running in the background. Then, while in
+  the screen session, type `exit`. The screen session will now end and you will not be able to reconnect or reattach to
+  the old session, since it no longer exists, until you create a new session.
+- Remember, screen is useful when you want your process to continue after you close your main ssh client.
+
 [licence]: https://img.shields.io/github/license/artshishkin/art-bradley-socketio-typescript.svg
