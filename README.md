@@ -240,4 +240,8 @@ server {
     8. Test automatic renewal
         - `sudo certbot renew --dry-run`
 
+### Certificate of Completion
+
+![](Certificate/UC-SocketIOTypescript-SeanBradley.png)
+
 [licence]: https://img.shields.io/github/license/artshishkin/art-bradley-socketio-typescript.svg
