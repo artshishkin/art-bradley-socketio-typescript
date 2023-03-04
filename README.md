@@ -184,4 +184,37 @@ server {
 3. Visit
     - `minigames.shyshkin.org`
 
+#### 40. Add SSL
+
+1. Sean Bradley's instructions
+    1. Install CertBot
+        - `apt install certbot`
+    2. Now we can run CertBot
+        - `certbot certonly`
+        - Select option 2. In the next few steps it will want to know the web root of our application since it will put
+          a temporary file into the folder and try and retrieve it using the domain name. This is to very that we
+          control this server and domain name.
+        - The web root folder will be the root folder that our NodeJS server is serving to the browser client. According
+          to my setup, that will be __/var/www/minigames/dist/client/__
+    3. Will be created certificates
+        - `Successfully received certificate.`
+        - `Certificate is saved at: /etc/letsencrypt/live/minigames.shyshkin.org/fullchain.pem`
+        - `Key is saved at:         /etc/letsencrypt/live/minigames.shyshkin.org/privkey.pem`
+        - `This certificate expires on 2023-06-02.`
+    4. Replace your Nginx minigames.conf with the [minigames_cert.conf](03-minigame/nginx/minigames_cert.conf)
+        - `Also replace occurrences of YOUR-DOMAIN-NAME with your actual domain name that you received the certificates for.`
+    5. Test correctness
+        - `nginx -t`
+            - `nginx: [warn] the "ssl" directive is deprecated, use the "listen ... ssl" directive instead in /etc/nginx/sites-enabled/minigames_cert.conf:4`
+            - `nginx: the configuration file /etc/nginx/nginx.conf syntax is ok`
+            - `nginx: configuration file /etc/nginx/nginx.conf test is successful`
+    6. Restart NGINX
+        - `service nginx restart`
+    7. Check status
+        - `service nginx status`
+    8. Test automatic renewal
+        - `sudo certbot renew --dry-run`
+            - `Congratulations, all simulated renewals succeeded:`
+            - `/etc/letsencrypt/live/minigames.shyshkin.org/fullchain.pem (success)`
+
 [licence]: https://img.shields.io/github/license/artshishkin/art-bradley-socketio-typescript.svg
