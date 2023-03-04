@@ -216,5 +216,28 @@ server {
         - `sudo certbot renew --dry-run`
             - `Congratulations, all simulated renewals succeeded:`
             - `/etc/letsencrypt/live/minigames.shyshkin.org/fullchain.pem (success)`
+2. Official [CertBot Instructions](https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal)
+    1. SSH into the server
+    2. Install snapd
+        - `snap --version` - already installed
+    3. Ensure that your version of snapd is up to date
+        - `sudo snap install core; sudo snap refresh core`
+    4. Remove certbot-auto and any Certbot OS packages
+        - `sudo apt-get remove certbot`
+    5. Install Certbot
+        - `sudo snap install --classic certbot`
+    6. Prepare the Certbot command
+        - `sudo ln -s /snap/bin/certbot /usr/bin/certbot`
+    7. Choose how you'd like to run Certbot
+        - Either get and install your certificates...
+            - Run this command to get a certificate and have Certbot edit your nginx configuration automatically to
+              serve it, turning on HTTPS access in a single step.
+            - `sudo certbot --nginx`
+        - Or, just get a certificate
+            - If you're feeling more conservative and would like to make the changes to your nginx configuration by
+              hand, run this command.
+            - `sudo certbot certonly --nginx`
+    8. Test automatic renewal
+        - `sudo certbot renew --dry-run`
 
 [licence]: https://img.shields.io/github/license/artshishkin/art-bradley-socketio-typescript.svg
